@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CaptoFlow — Grabadora para TikTok, Reels y YouTube</title>
+    <meta name="description" content="Cámara que sigue al cursor. Vertical 9:16 y horizontal 16:9 en la misma app. Encoder por hardware y modo dibujo en vivo. Gratis para Windows.">
+    <meta name="theme-color" content="#0a0a0f">
+
+    <meta property="og:title" content="CaptoFlow — La grabadora con cámara que sigue al cursor">
+    <meta property="og:description" content="Tutoriales para TikTok, Reels, Shorts y YouTube. Sin pasos extra de edición. Gratis para Windows.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://henryccopa.github.io/captoflow/">
+    <meta property="og:image" content="https://henryccopa.github.io/captoflow/app-screenshot.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CaptoFlow — Grabadora con cámara que sigue al cursor">
+    <meta name="twitter:description" content="Tutoriales para TikTok, Reels, Shorts y YouTube. Gratis para Windows.">
+    <meta name="twitter:image" content="https://henryccopa.github.io/captoflow/app-screenshot.png">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ef4444'/%3E%3Ccircle cx='50' cy='50' r='14' fill='%23fff'/%3E%3C/svg%3E">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CaptoFlow",
+        "operatingSystem": "Windows 10, Windows 11",
+        "applicationCategory": "MultimediaApplication",
+        "softwareVersion": "1.0.0",
+        "offers": [
+            { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+            { "@type": "Offer", "price": "29", "priceCurrency": "USD", "name": "Pro" }
+        ],
+        "author": { "@type": "Person", "name": "Henry Ccopa Flores" },
+        "url": "https://henryccopa.github.io/captoflow/"
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #14141a;
+            --bg-elev: #1c1c25;
+            --text: #f5f5f7;
+            --text-muted: #8b8b95;
+            --text-dim: #5c5c66;
+            --accent: #ef4444;
+            --accent-hover: #f87171;
+            --accent-soft: rgba(239, 68, 68, 0.12);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.14);
+            --shadow-lg: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== Nav ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.78);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 17px;
+            letter-spacing: -0.01em;
+        }
+
+        .logo-mark {
+            width: 26px;
+            height: 26px;
+            border-radius: 7px;
+            background: var(--accent);
+            display: grid;
+            place-items: center;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+        }
+        .logo-mark::after {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .nav-links a { transition: color 0.15s ease; }
+        .nav-links a:hover { color: var(--text); }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+        }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--border-strong);
+        }
+        .btn-secondary:hover { background: var(--bg-card); border-color: rgba(255,255,255,0.25); }
+
+        .btn-large { padding: 13px 22px; font-size: 15px; }
+
+        /* ===== Hero ===== */
+        .hero {
+            padding: 64px 0 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 720px;
+            height: 720px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.18) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-inner { position: relative; z-index: 1; }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 13px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-radius: 999px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        .hero-tag .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        h1 {
+            font-size: clamp(34px, 5.4vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin: 0 auto 18px;
+            max-width: 820px;
+        }
+
+        h1 .accent {
+            background: linear-gradient(180deg, #f87171 0%, #ef4444 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.subtitle {
+            font-size: clamp(16px, 1.8vw, 18px);
+            color: var(--text-muted);
+            max-width: 580px;
+            margin: 0 auto 28px;
+            line-height: 1.55;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .hero-meta {
+            font-size: 12.5px;
+            color: var(--text-dim);
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero-meta span { color: var(--text-muted); }
+        .hero-meta .sep { color: var(--text-dim); }
+
+        /* ===== App screenshot ===== */
+        .mockup-wrap {
+            margin: 52px auto 0;
+            max-width: 980px;
+            position: relative;
+        }
+        .mockup-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.18) 0%, transparent 60%);
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        .app-shot {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: #11111a;
+            border: 1px solid var(--border-strong);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, #000 4%, #000 96%, rgba(0,0,0,0.95) 100%);
+            -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, #000 4%, #000 96%, rgba(0,0,0,0.95) 100%);
+        }
+
+        /* ===== Sections ===== */
+        section { padding: 56px 0; position: relative; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .section-eyebrow {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: clamp(26px, 3.5vw, 36px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.18;
+            margin-bottom: 10px;
+        }
+
+        .section-sub {
+            font-size: 15px;
+            color: var(--text-muted);
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* ===== Features ===== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .feature {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px 20px;
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+        }
+        .feature:hover {
+            border-color: rgba(239, 68, 68, 0.3);
+            transform: translateY(-2px);
+            background: linear-gradient(180deg, rgba(239,68,68,0.04) 0%, var(--bg-card) 60%);
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+        }
+        .feature-icon svg { width: 19px; height: 19px; }
+
+        .feature h3 {
+            font-size: 15.5px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+        .feature p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* ===== Steps ===== */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            padding: 22px 22px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            top: -14px;
+            left: 22px;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.45);
+        }
+
+        .step h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 6px 0 6px;
+            letter-spacing: -0.01em;
+        }
+        .step p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+        .step code {
+            background: var(--bg-elev);
+            color: var(--text);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'SF Mono', Consolas, monospace;
+            border: 1px solid var(--border);
+        }
+
+        /* ===== Hotkeys ===== */
+        .hotkeys-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 22px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hotkey-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            transition: border-color 0.15s ease;
+        }
+        .hotkey-row:hover { border-color: var(--border-strong); }
+
+        .hotkey-desc {
+            font-size: 13.5px;
+            color: var(--text);
+        }
+
+        .key-combo {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .kbd {
+            display: inline-block;
+            padding: 3px 7px;
+            background: var(--bg-elev);
+            border: 1px solid var(--border-strong);
+            border-bottom-width: 2px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.2;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        .hotkey-note {
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--text-dim);
+            margin-top: 20px;
+        }
+
+        /* ===== Pricing ===== */
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 740px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 26px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card.featured {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(239, 68, 68, 0.08) 0%, var(--bg-card) 60%);
+            box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2), 0 18px 50px -18px rgba(239, 68, 68, 0.35);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -11px;
+            right: 22px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.5);
+        }
+
+        .price-name {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .price-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        .price-amount strong {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .price-amount span {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        .price-desc {
+            color: var(--text-muted);
+            font-size: 13.5px;
+            margin-bottom: 18px;
+            min-height: 36px;
+        }
+
+        .price-list {
+            list-style: none;
+            margin-bottom: 22px;
+            flex: 1;
+        }
+        .price-list li {
+            padding: 5px 0;
+            font-size: 13.5px;
+            color: var(--text);
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+        }
+        .price-list li::before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ef4444' stroke-width='3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .price-cta {
+            display: block;
+            text-align: center;
+            width: 100%;
+            justify-content: center;
+        }
+        .price-cta.disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.15s ease;
+        }
+        .faq-item[open] { border-color: var(--border-strong); }
+
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 14px 20px;
+            font-size: 14.5px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            user-select: none;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item .chev {
+            color: var(--text-dim);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+        .faq-item[open] .chev { transform: rotate(180deg); }
+
+        .faq-body {
+            padding: 0 20px 16px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+        .faq-body code {
+            background: var(--bg-elev);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12.5px;
+            font-family: 'SF Mono', Consolas, monospace;
+            color: var(--text);
+        }
+
+        /* ===== Final CTA ===== */
+        .final-cta {
+            text-align: center;
+            padding: 68px 24px;
+            background: linear-gradient(180deg, transparent 0%, rgba(239, 68, 68, 0.06) 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 560px;
+            height: 560px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .final-cta > * { position: relative; z-index: 1; }
+        .final-cta h2 { margin-bottom: 12px; }
+        .final-cta p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0 auto 22px;
+            max-width: 480px;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            padding: 28px 0 32px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-copy {
+            font-size: 12.5px;
+            color: var(--text-dim);
+        }
+        .footer-links {
+            display: flex;
+            gap: 22px;
+            font-size: 12.5px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            transition: color 0.15s ease;
+        }
+        .footer-links a:hover { color: var(--text); }
+
+        /* ===== Reveal ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 900px) {
+            .features, .steps, .pricing, .hotkeys-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 680px) {
+            .nav-links { display: none; }
+            .hero { padding: 48px 0 36px; }
+            section { padding: 44px 0; }
+            .final-cta { padding: 54px 24px; }
+        }
+        @media (max-width: 480px) {
+            .hero-ctas { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; }
+            h1 { font-size: 32px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001s !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo">
+                <span class="logo-mark"></span>
+                CaptoFlow
+            </a>
+            <div class="nav-links">
+                <a href="#features">Características</a>
+                <a href="#hotkeys">Atajos</a>
+                <a href="#pricing">Precio</a>
+            </div>
+            <a href="https://github.com/henryccopa/captoflow/releases/latest" class="btn btn-primary">Descargar</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="hero-tag">
+                    <span class="dot"></span>v1.0 · Windows 10/11
+                </div>
+
+                <h1>La cámara <span class="accent">sigue al cursor.</span><br>Vos solo grabás.</h1>
+
+                <p class="subtitle">
+                    Vertical 9:16 y horizontal 16:9 en la misma app. Encoder por hardware, modo dibujo en vivo y atajos personalizables.
+                </p>
+
+                <div class="hero-ctas">
+                    <a href="https://github.com/henryccopa/captoflow/releases/latest" class="btn btn-primary btn-large">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Descargar gratis
+                    </a>
+                    <a href="https://github.com/henryccopa/captoflow" class="btn btn-secondary btn-large">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+
+                <div class="hero-meta">
+                    <span>~140 MB</span>
+                    <span class="sep">·</span>
+                    <span>Sin instalación</span>
+                    <span class="sep">·</span>
+                    <span>Sin cuenta</span>
+                </div>
+
+                <div class="mockup-wrap reveal">
+                    <img
+                        class="app-shot"
+                        src="app-screenshot.png"
+                        alt="Interfaz de CaptoFlow"
+                        width="1198"
+                        height="877"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-eyebrow">Características</div>
+                    <h2>Hecha para grabar rápido</h2>
+                    <p class="section-sub">Todo lo necesario para tutoriales listos para subir, sin pasos extra.</p>
+                </div>
+
+                <div class="features">
+                    <div class="feature reveal">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>
+                                <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+                                <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3>Sigue al cursor</h3>
+                        <p>Cámara con suavizado cinematográfico. Tu mouse nunca queda fuera del cuadro.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="6" width="8" height="12" rx="1"/><rect x="13" y="9" width="8" height="6" rx="1"/>
+                            </svg>
+                        </div>
+                        <h3>9:16 + 16:9</h3>
+                        <p>TikTok, Reels y Shorts en vertical. YouTube en horizontal. Cambiás con un click.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
+                            </svg>
+                        </div>
+                        <h3>Encoder por hardware</h3>
+                        <p>NVENC, QuickSync y AMF detectados automáticamente. Nítido y sin saturar el CPU.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/>
+                            </svg>
+                        </div>
+                        <h3>Dibujo en vivo</h3>
+                        <p>Pluma, flecha, rectángulo, círculo y texto encima de la pantalla mientras grabás.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M7 16h10"/>
+                            </svg>
+                        </div>
+                        <h3>Atajos personalizables</h3>
+                        <p>Hotkeys globales que no chocan con tu IDE. Burbuja en pantalla mostrando qué pulsás.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                <line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/>
+                            </svg>
+                        </div>
+                        <h3>Lupa y zoom</h3>
+                        <p>Disco magnificado que sigue al cursor + zoom de cámara para tus close-ups de UI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-eyebrow">En 3 pasos</div>
+                    <h2>De descarga a primer video en 2 minutos</h2>
+                </div>
+
+                <div class="steps">
+                    <div class="step reveal">
+                        <h3>Descargar</h3>
+                        <p>Bajá el .exe portable (~140 MB). Sin instalación ni privilegios.</p>
+                    </div>
+                    <div class="step reveal">
+                        <h3>Configurar</h3>
+                        <p>Elegí formato, calidad, FPS y audio. Los atajos los podés rebindear.</p>
+                    </div>
+                    <div class="step reveal">
+                        <h3>Grabar</h3>
+                        <p><code>Shift+F9</code> para empezar y detener. <code>Shift+F8</code> abre el modo dibujo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hotkeys -->
+        <section id="hotkeys">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-eyebrow">Atajos</div>
+                    <h2>Manejá todo sin tocar el mouse</h2>
+                </div>
+
+                <div class="hotkeys-grid">
+                    <div class="hotkey-row reveal">
+                        <span class="hotkey-desc">Iniciar / detener</span>
+                        <span class="key-combo"><span class="kbd">Shift</span><span class="kbd">F9</span></span>
+                    </div>
+                    <div class="hotkey-row reveal">
+                        <span class="hotkey-desc">Pausar / reanudar</span>
+                        <span class="key-combo"><span class="kbd">Shift</span><span class="kbd">F10</span></span>
+                    </div>
+                    <div class="hotkey-row reveal">
+                        <span class="hotkey-desc">Modo dibujo</span>
+                        <span class="key-combo"><span class="kbd">Shift</span><span class="kbd">F8</span></span>
+                    </div>
+                    <div class="hotkey-row reveal">
+                        <span class="hotkey-desc">Fijar cámara</span>
+                        <span class="key-combo"><span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">L</span></span>
+                    </div>
+                    <div class="hotkey-row reveal">
+                        <span class="hotkey-desc">Región personalizada</span>
+                        <span class="key-combo"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">R</span></span>
+                    </div>
+                    <div class="hotkey-row reveal">
+                        <span class="hotkey-desc">Panel de comandos</span>
+                        <span class="key-combo"><span class="kbd">Shift</span><span class="kbd">F1</span></span>
+                    </div>
+                </div>
+
+                <p class="hotkey-note">Todos personalizables desde Configuración → Atajos.</p>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-eyebrow">Precio</div>
+                    <h2>Gratis. Pro cuando quieras.</h2>
+                    <p class="section-sub">Sin suscripciones. Pago único. Updates de por vida.</p>
+                </div>
+
+                <div class="pricing">
+                    <div class="price-card reveal">
+                        <div class="price-name">Free</div>
+                        <div class="price-amount">
+                            <strong>$0</strong>
+                            <span>para siempre</span>
+                        </div>
+                        <p class="price-desc">Todo para empezar a grabar hoy.</p>
+                        <ul class="price-list">
+                            <li>9:16 + 16:9</li>
+                            <li>Cámara que sigue al cursor</li>
+                            <li>Audio mic + sistema</li>
+                            <li>Modo dibujo + lupa</li>
+                            <li>Marca de agua sutil</li>
+                        </ul>
+                        <a href="https://github.com/henryccopa/captoflow/releases/latest" class="btn btn-secondary btn-large price-cta">Descargar Free</a>
+                    </div>
+
+                    <div class="price-card featured reveal">
+                        <div class="price-badge">Pre-venta</div>
+                        <div class="price-name">Pro</div>
+                        <div class="price-amount">
+                            <strong>$29</strong>
+                            <span>pago único</span>
+                        </div>
+                        <p class="price-desc">Sin marca de agua, soporte prioritario.</p>
+                        <ul class="price-list">
+                            <li>Todo lo de Free</li>
+                            <li>Sin marca de agua</li>
+                            <li>Soporte prioritario</li>
+                            <li>Updates de por vida</li>
+                            <li>Acceso anticipado</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-large price-cta disabled">Próximamente</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-eyebrow">FAQ</div>
+                    <h2>Preguntas frecuentes</h2>
+                </div>
+
+                <div class="faq">
+                    <details class="faq-item reveal">
+                        <summary>
+                            ¿Qué necesito?
+                            <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </summary>
+                        <div class="faq-body">Windows 10 u 11. Cualquier PC moderna. Si tenés GPU NVIDIA, Intel o AMD, el encoder por hardware se usa automáticamente. Sin Python ni ffmpeg adicional: todo viene en el .exe.</div>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            ¿Funciona offline?
+                            <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </summary>
+                        <div class="faq-body">Sí. Sin telemetría, sin servidores, sin cuenta. Procesa todo localmente.</div>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            ¿Mic + audio del sistema a la vez?
+                            <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </summary>
+                        <div class="faq-body">Sí. Pistas independientes con volumen y mute por fuente, mezcladas con <code>ffmpeg amix</code> al exportar. VU meter en vivo.</div>
+                    </details>
+
+                    <details class="faq-item reveal">
+                        <summary>
+                            ¿Mac o Linux?
+                            <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </summary>
+                        <div class="faq-body">Por ahora solo Windows. La captura usa Desktop Duplication API (DXGI) que es Windows-only.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Empezá a grabar mejor hoy.</h2>
+                <p>Gratis, sin instalación, sin cuenta. Abrís y grabás.</p>
+                <a href="https://github.com/henryccopa/captoflow/releases/latest" class="btn btn-primary btn-large">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Descargar para Windows
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-copy">© 2026 CaptoFlow · Hecho en Perú 🇵🇪 por Henry Ccopa Flores</div>
+            <div class="footer-links">
+                <a href="https://github.com/henryccopa/captoflow">GitHub</a>
+                <a href="https://github.com/henryccopa/captoflow/releases">Releases</a>
+                <a href="https://github.com/henryccopa/captoflow/issues">Reportar bug</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const io = new IntersectionObserver((entries) => {
+            for (const e of entries) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in');
+                    io.unobserve(e.target);
+                }
+            }
+        }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+
+</body>
+</html>
