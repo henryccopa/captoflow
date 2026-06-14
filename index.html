@@ -29,7 +29,8 @@
         "softwareVersion": "1.0.0",
         "offers": [
             { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
-            { "@type": "Offer", "price": "29", "priceCurrency": "USD", "name": "Pro" }
+            { "@type": "Offer", "price": "5", "priceCurrency": "USD", "name": "Mensual" },
+            { "@type": "Offer", "price": "30", "priceCurrency": "USD", "name": "Pro" }
         ],
         "author": { "@type": "Person", "name": "Henry Ccopa Flores" },
         "url": "https://henryccopa.github.io/captoflow/"
@@ -468,17 +469,18 @@
         /* ===== Pricing ===== */
         .pricing {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            max-width: 740px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            max-width: 940px;
             margin: 0 auto;
+            align-items: stretch;
         }
 
         .price-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 28px 26px;
+            padding: 26px 22px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -745,7 +747,7 @@
                     <span class="dot"></span>v1.0 · Windows 10/11
                 </div>
 
-                <h1>La cámara <span class="accent">sigue al cursor.</span><br>Vos solo grabás.</h1>
+                <h1>La cámara <span class="accent">sigue al cursor.</span><br>Tú solo grabas.</h1>
 
                 <p class="subtitle">
                     Vertical 9:16 y horizontal 16:9 en la misma app. Encoder por hardware, modo dibujo en vivo y atajos personalizables.
@@ -803,7 +805,7 @@
                             </svg>
                         </div>
                         <h3>Sigue al cursor</h3>
-                        <p>Cámara con suavizado cinematográfico. Tu mouse nunca queda fuera del cuadro.</p>
+                        <p>Cámara con suavizado cinematográfico. El cursor nunca queda fuera del cuadro.</p>
                     </div>
 
                     <div class="feature reveal">
@@ -813,7 +815,7 @@
                             </svg>
                         </div>
                         <h3>9:16 + 16:9</h3>
-                        <p>TikTok, Reels y Shorts en vertical. YouTube en horizontal. Cambiás con un click.</p>
+                        <p>TikTok, Reels y Shorts en vertical. YouTube en horizontal. Un clic para cambiar.</p>
                     </div>
 
                     <div class="feature reveal">
@@ -833,7 +835,7 @@
                             </svg>
                         </div>
                         <h3>Dibujo en vivo</h3>
-                        <p>Pluma, flecha, rectángulo, círculo y texto encima de la pantalla mientras grabás.</p>
+                        <p>Pluma, flecha, rectángulo, círculo y texto encima de la pantalla mientras grabas.</p>
                     </div>
 
                     <div class="feature reveal">
@@ -872,11 +874,11 @@
                 <div class="steps">
                     <div class="step reveal">
                         <h3>Descargar</h3>
-                        <p>Bajá el .exe portable (~140 MB). Sin instalación ni privilegios.</p>
+                        <p>Descarga el .exe portable (~140 MB). Sin instalación ni privilegios.</p>
                     </div>
                     <div class="step reveal">
                         <h3>Configurar</h3>
-                        <p>Elegí formato, calidad, FPS y audio. Los atajos los podés rebindear.</p>
+                        <p>Elige formato, calidad, FPS y audio. Todos los atajos son personalizables.</p>
                     </div>
                     <div class="step reveal">
                         <h3>Grabar</h3>
@@ -891,7 +893,7 @@
             <div class="container">
                 <div class="section-header reveal">
                     <div class="section-eyebrow">Atajos</div>
-                    <h2>Manejá todo sin tocar el mouse</h2>
+                    <h2>Controla todo sin tocar el mouse</h2>
                 </div>
 
                 <div class="hotkeys-grid">
@@ -952,20 +954,36 @@
                         <a href="https://github.com/henryccopa/captoflow/releases/latest" class="btn btn-secondary btn-large price-cta">Descargar Free</a>
                     </div>
 
+                    <div class="price-card reveal">
+                        <div class="price-name">Mensual</div>
+                        <div class="price-amount">
+                            <strong>$5</strong>
+                            <span>al mes</span>
+                        </div>
+                        <p class="price-desc">Pro completo con pago flexible. Cancelas cuando quieras.</p>
+                        <ul class="price-list">
+                            <li>Todo lo de Free</li>
+                            <li>Sin marca de agua</li>
+                            <li>Soporte por email</li>
+                            <li>Cancela en cualquier momento</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary btn-large price-cta disabled">Próximamente</a>
+                    </div>
+
                     <div class="price-card featured reveal">
-                        <div class="price-badge">Pre-venta</div>
+                        <div class="price-badge">Mejor valor</div>
                         <div class="price-name">Pro</div>
                         <div class="price-amount">
-                            <strong>$29</strong>
+                            <strong>$30</strong>
                             <span>pago único</span>
                         </div>
-                        <p class="price-desc">Sin marca de agua, soporte prioritario.</p>
+                        <p class="price-desc">Una sola vez y es tuyo para siempre.</p>
                         <ul class="price-list">
                             <li>Todo lo de Free</li>
                             <li>Sin marca de agua</li>
                             <li>Soporte prioritario</li>
                             <li>Updates de por vida</li>
-                            <li>Acceso anticipado</li>
+                            <li>Acceso anticipado a features</li>
                         </ul>
                         <a href="#" class="btn btn-primary btn-large price-cta disabled">Próximamente</a>
                     </div>
@@ -987,7 +1005,7 @@
                             ¿Qué necesito?
                             <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                         </summary>
-                        <div class="faq-body">Windows 10 u 11. Cualquier PC moderna. Si tenés GPU NVIDIA, Intel o AMD, el encoder por hardware se usa automáticamente. Sin Python ni ffmpeg adicional: todo viene en el .exe.</div>
+                        <div class="faq-body">Windows 10 u 11. Cualquier PC moderna. Si tienes GPU NVIDIA, Intel o AMD, el encoder por hardware se usa automáticamente. Sin Python ni ffmpeg adicional: todo viene en el .exe.</div>
                     </details>
 
                     <details class="faq-item reveal">
@@ -1020,8 +1038,8 @@
         <!-- Final CTA -->
         <section class="final-cta">
             <div class="container">
-                <h2>Empezá a grabar mejor hoy.</h2>
-                <p>Gratis, sin instalación, sin cuenta. Abrís y grabás.</p>
+                <h2>Empieza a grabar mejor hoy.</h2>
+                <p>Gratis, sin instalación, sin cuenta. Lo abres y grabas.</p>
                 <a href="https://github.com/henryccopa/captoflow/releases/latest" class="btn btn-primary btn-large">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Descargar para Windows
